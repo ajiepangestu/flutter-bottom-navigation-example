@@ -4,17 +4,13 @@ import 'package:titled_navigation_bar/titled_navigation_bar.dart';
 
 class TitledBottomNavigationBarPage extends BottomNavigationBarPage {
   TitledBottomNavigationBarPage()
-      : super(
-            title: 'Titled Bottom Navigation',
-            subtitle: 'Package: titled_navigation_bar: ^4.1.0');
+      : super(title: 'Titled Bottom Navigation', subtitle: 'Package: titled_navigation_bar: ^4.1.0');
 
   @override
-  _TitledBottomNavigationBarState createState() =>
-      _TitledBottomNavigationBarState();
+  _TitledBottomNavigationBarState createState() => _TitledBottomNavigationBarState();
 }
 
-class _TitledBottomNavigationBarState
-    extends State<TitledBottomNavigationBarPage> {
+class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBarPage> {
   int _seledtedIndex = 0;
   late PageController _pageController;
 
@@ -51,28 +47,13 @@ class _TitledBottomNavigationBarState
           });
           _pageController.jumpToPage(index);
         },
-        items: [
-          TitledNavigationBarItem(
-            icon: Icons.calendar_today,
-            title: Text("Schedule"),
-          ),
-          TitledNavigationBarItem(
-            icon: Icons.people,
-            title: Text('Contacts'),
-          ),
-          TitledNavigationBarItem(
-            icon: Icons.attach_money,
-            title: Text('Bills'),
-          ),
-          TitledNavigationBarItem(
-            icon: Icons.note,
-            title: Text('Notes'),
-          ),
-          TitledNavigationBarItem(
-            icon: Icons.settings,
-            title: Text('Settings'),
-          ),
-        ],
+        items: this.widget.navigationTitles.map((title) {
+          int index = this.widget.navigationTitles.indexOf(title);
+          return TitledNavigationBarItem(
+            icon: this.widget.navigationIcons[index].icon,
+            title: Text(title),
+          );
+        }).toList(),
       ),
     );
   }

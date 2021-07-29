@@ -4,17 +4,13 @@ import 'package:flutter_bottom_navigation/bottom_navigation_bar/bottom_navigatio
 
 class CurvedBottomNavigationBarPage extends BottomNavigationBarPage {
   CurvedBottomNavigationBarPage()
-      : super(
-            title: 'Curved Bottom Navigation Bar',
-            subtitle: 'Package: curved_navigation_bar: ^1.0.1');
+      : super(title: 'Curved Bottom Navigation Bar', subtitle: 'Package: curved_navigation_bar: ^1.0.1');
 
   @override
-  _CurvedBottomNavigationBarState createState() =>
-      _CurvedBottomNavigationBarState();
+  _CurvedBottomNavigationBarState createState() => _CurvedBottomNavigationBarState();
 }
 
-class _CurvedBottomNavigationBarState
-    extends State<CurvedBottomNavigationBarPage> {
+class _CurvedBottomNavigationBarState extends State<CurvedBottomNavigationBarPage> {
   int _selectedIndex = 0;
   late PageController _pageController;
 
@@ -46,6 +42,7 @@ class _CurvedBottomNavigationBarState
         children: this.widget.content,
       ),
       bottomNavigationBar: CurvedNavigationBar(
+        backgroundColor: Colors.blue,
         index: _selectedIndex,
         onTap: (index) {
           setState(() {
@@ -53,13 +50,7 @@ class _CurvedBottomNavigationBarState
           });
           _pageController.jumpToPage(index);
         },
-        items: [
-          Icon(Icons.calendar_today),
-          Icon(Icons.people),
-          Icon(Icons.attach_money),
-          Icon(Icons.note),
-          Icon(Icons.settings)
-        ],
+        items: this.widget.navigationIcons.map((icon) => icon).toList(),
       ),
     );
   }

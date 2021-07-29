@@ -3,17 +3,12 @@ import 'package:flutter_bottom_navigation/bottom_navigation_bar/bottom_navigatio
 
 class DefaultBottomNavigationBarPage extends BottomNavigationBarPage {
   const DefaultBottomNavigationBarPage({Key? key})
-      : super(
-            key: key,
-            title: 'Default Bottom Navigation',
-            subtitle: 'Package: - (Flutter Default)');
+      : super(key: key, title: 'Default Bottom Navigation', subtitle: 'Package: - (Flutter Default)');
 
-  _DefaultBottomNavigationBarState createState() =>
-      _DefaultBottomNavigationBarState();
+  _DefaultBottomNavigationBarState createState() => _DefaultBottomNavigationBarState();
 }
 
-class _DefaultBottomNavigationBarState
-    extends State<DefaultBottomNavigationBarPage> {
+class _DefaultBottomNavigationBarState extends State<DefaultBottomNavigationBarPage> {
   int _selectedIndex = 0;
   late PageController _pageController;
 
@@ -55,28 +50,13 @@ class _DefaultBottomNavigationBarState
           });
           _pageController.jumpToPage(index);
         },
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            label: "Schedule",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.people),
-            label: 'Contacts',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.attach_money),
-            label: 'Bills',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.note),
-            label: 'Notes',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-          ),
-        ],
+        items: this.widget.navigationTitles.map((title) {
+          int index = this.widget.navigationTitles.indexOf(title);
+          return BottomNavigationBarItem(
+            icon: this.widget.navigationIcons[index],
+            label: title,
+          );
+        }).toList(),
       ),
     );
   }

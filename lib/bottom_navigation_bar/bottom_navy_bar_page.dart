@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bottom_navigation/bottom_navigation_bar/bottom_navigation_bar_page.dart';
 
 class BottomNavyBarPage extends BottomNavigationBarPage {
-  BottomNavyBarPage()
-      : super(
-            title: 'Bottom Navy Bar',
-            subtitle: 'Package: bottom_navy_bar: ^5.6.0');
+  BottomNavyBarPage() : super(title: 'Bottom Navy Bar', subtitle: 'Package: bottom_navy_bar: ^5.6.0');
 
   @override
   _BottomNavyBarState createState() => _BottomNavyBarState();
@@ -54,28 +51,13 @@ class _BottomNavyBarState extends State<BottomNavyBarPage> {
           });
           _pageController.jumpToPage(index);
         },
-        items: [
-          BottomNavyBarItem(
-            title: Text('Schedule'),
-            icon: Icon(Icons.calendar_today),
-          ),
-          BottomNavyBarItem(
-            title: Text('Contact'),
-            icon: Icon(Icons.people),
-          ),
-          BottomNavyBarItem(
-            title: Text('Bills'),
-            icon: Icon(Icons.attach_money),
-          ),
-          BottomNavyBarItem(
-            title: Text('Notes'),
-            icon: Icon(Icons.note),
-          ),
-          BottomNavyBarItem(
-            title: Text('Settings'),
-            icon: Icon(Icons.settings),
-          ),
-        ],
+        items: this.widget.navigationTitles.map((title) {
+          int index = this.widget.navigationTitles.indexOf(title);
+          return BottomNavyBarItem(
+            title: Text(title),
+            icon: this.widget.navigationIcons[index],
+          );
+        }).toList(),
       ),
     );
   }
